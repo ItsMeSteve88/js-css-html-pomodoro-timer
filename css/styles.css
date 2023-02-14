@@ -1,152 +1,110 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    background-color: rgb(0, 0, 0);
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
     text-align: center;
-    align-items: center;
-    justify-content: center;
-    background: #000000;
-    color: antiquewhite;
+    color: rgb(255, 255, 255);
+    font-family: 'Trebuchet MS', Arial, sans-serif;
   }
-
-.pomodoro-timer
-{
+  
+  .pomodoro-timer {
     padding: 30px;
-}
+    border-radius: 30px;
+  }
   
-.base-timer {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 30px auto;
-}
+  .pomodoro-timer h1 {
+    font-size: 100px;
+    margin: 0;
+  }
   
-.base-timer__svg {
-    transform: scaleX(-1);
-    
-}
+  .custom-slider {
+    width: 100%;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
   
-.base-timer__circle {
-    fill: none;
-    stroke: none;
-    
-}
+  .fill {
+    height: 20px;
+    width: 100%;
+    background-color: rgb(125, 249, 208);
+  }
   
-.base-timer__path-elapsed {
-    stroke-width: 2px;
-    stroke: rgba(94, 93, 93, 0.2);
-}
-  
-.base-timer__path-remaining {
-    stroke-width: 7px;
-    stroke-linecap: round;
-    transform: rotate(90deg);
-    transform-origin: center;
-    transition: 1s linear all;
-    fill-rule: nonzero;
-    stroke: currentColor;
-}
-  
-.base-timer__path-remaining.blue {
-    color: rgb(59, 111, 233);
-}
-  
-.base-timer__path-remaining.orange {
-    color: orange;
-}
-  
-.base-timer__path-remaining.red {
-    color: red;
-}
-  
-.base-timer__label {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-}
-
-.task-block p
-{
-    width: 242px;
-    font-size: 20px;
-}
-
-.task-block
-{
-    background-color: rgb(89, 0, 235);
+  .task-block {
+    background-color: rgb(41, 80, 96);
     border-radius: 20px;
     margin: 10px 0;
-    height: 45px;
-    width: 400px;
+    height: 60px;
+    width: 412px;
     display: flex;
     align-items: center;
     text-align: left;
-}
-
-.task-block .delete-icon
-{
-    width: 50px;
+  }
+  
+  .task-block p {
+    width: 242px;
+    font-size: 20px;
+  }
+  
+  .task-block .delete-icon {
+    width: 20px;
+    margin-right: 20px;
     text-align: center;
     cursor: pointer;
-}
-
-.task-block .controller-button
-{
+    background-color: rgba(244, 83, 83, 0.8);
+    padding: 18px;
+    border-radius: 20px 0 0 20px;
+  }
+  
+  .task-block .controller-button {
     height: 100%;
-    border: none ;
+    border: none;
     width: 120px;
     border-radius: 0 20px 20px 0;
     font-weight: bold;
     font-size: 20px;
-}
-
-.input-container
-{
+  }
+  
+  .input-container {
     height: 60px;
-    width: 400px;
+    width: 412px;
     display: flex;
-    justify-content: center;
-}
-
-.input-container input
-{
-    background-color: rgb(89, 0, 255);
+  }
+  
+  .input-container input {
+    background-color: rgb(206, 206, 207);
     border-radius: 20px 0 0 20px;
-    width: 200px;
-    height: 80%;
-    border: none;
-    font-size: 20px;
+    height: 100%;
+    width: 240px;
     padding: 0 30px;
-    color: antiquewhite;
-}
-
-.input-container input:focus
-{
-    outline: none;
-}
-
-.submit-button {
-    background-color: rgb(89, 0, 255);
     border: none;
-    color: white;
-    width: 120px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 20px;
-    cursor: pointer;
+  }
+  
+  .input-container input:focus {
+    outline: none;
+  }
+  
+  .submit-button {
+    background-color: rgb(72, 182, 96);
+    color: rgb(255, 255, 255);
+    border: none;
+    height: 100%;
+    width: 113px;
+    font-weight: bold;
+    font-size: 20px;
     border-radius: 0 20px 20px 0;
-    height: 80%;
-}
-
-.sub-text
-{
+  }
+  
+  .sub-text {
     margin: 4px;
-}
+  }
+  
+  .active-button {
+    background-color: rgb(244, 83, 83);
+    color: rgb(255, 255, 255);
+  }
+  
