@@ -46,6 +46,28 @@ document.getElementById("timer").innerHTML = `
 </div>
 `;
 
+const taskContainer = document.querySelector('.task-container')
+
+function render()
+{ 
+  const taskBlock = document.createElement('div')
+  const deleteElement = document.createElement('p')
+  const title = document.createElement('p')
+  const controller = document.createElement('button')
+  
+  taskBlock.classList.add('task-block')
+  deleteElement.classList.add('delete-icon')
+  controller.classList.add('controller-button')
+  
+  deleteElement.textContent = '✖'
+  title.textContent = 'Task'
+  controller.textContent = 'Start'
+
+  taskBlock.appendChild(deleteElement, title, controller)
+  taskContainer.appendChild(taskBlock)
+
+}
+
 startTimer();
 
 function onTimesUp() {
