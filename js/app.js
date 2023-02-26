@@ -1,5 +1,11 @@
 const taskContainer = document.querySelector('.task-container')
 const submitButton = document.querySelector('.submit-button')
+const timeLeftDisplay = document.querySelector('#time-left')
+const sliderFill = document.querySelector('.fill')
+
+const startCount = 0
+let timeLeft = startCount
+let timerId
 
 
 let tasks = [
@@ -21,10 +27,31 @@ let tasks = [
 
 const descendingTasks = tasks.sort((taskA, taskB) => taskA.priority - taskB.priority)
 
+function handleClick(button)
+{
+    countDown(button)
+}
+
+function countDown()
+{
+  timerId = setInterval(() =>
+    {
+        timeLeft-- 
+      timeLeftDisplay.textContent = timeLeft
+      sliderFill.style.width = (timeLeft / startCount) * 100 + '%'
+      if (timeLeft <= 0)
+      {
+        clearInterval(timerId)
+        // start next task
+      }
+    }, 1000)
+}
+
+countDown()
 
 function render()
 {
-    descendingTasks.forEach(task =>
+    descendingTasks.forEach((task, index) =>
     {
         const taskBlock = document.createElement('div')
         const deleteElement = document.createElement('p')
@@ -39,7 +66,10 @@ function render()
         title.textContent = task.name
         controller.textContent = 'Start'
 
+        controller.id = index
+
         deleteElement.addEventListener('click', deleteTask)
+        controller.addEventListener('click', handleClick(controller))
     
         taskBlock.append(deleteElement, title, controller)
         taskContainer.append(taskBlock)
@@ -66,6 +96,7 @@ function addTask()
     if (value)
     {
         taskContainer.innerHTML = ''
+        inputElement.value = ''
         tasks.push({
             name: value,
             priority: tasks.length
