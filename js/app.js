@@ -3,7 +3,7 @@ const submitButton = document.querySelector('.submit-button')
 const timeLeftDisplay = document.querySelector('#time-left')
 const sliderFill = document.querySelector('.fill')
 
-const startCount = 0
+const startCount = 5
 let timeLeft = startCount
 let timerId
 
@@ -29,10 +29,36 @@ const descendingTasks = tasks.sort((taskA, taskB) => taskA.priority - taskB.prio
 
 function handleClick(button)
 {
-    countDown(button)
+    switch (button.textContent)
+    {
+        case 'ACTIVE':
+            button.textContent = 'PAUSED'
+            clearInterval(timerId)
+            break
+        case 'PAUSED':
+            button.textContent = 'ACTIVE'
+            countDown(button)
+            break
+        default:
+            const allButtons = document.querySelectorAll('.controller-button')
+            allButtons.forEach(button =>
+            {
+                button.textContent = 'START'
+                button.classList.remove('active-button')
+                clearInterval(timerId)
+                timeLeft = startCount
+                timeLeftDisplay.textContent = timeLeft
+            })
+        
+            button.textContent = 'ACTIVE'
+            button.classList.add('active-button')
+            countDown(button)
+            break
+    }
 }
 
-function countDown()
+
+function countDown(button)
 {
   timerId = setInterval(() =>
     {
@@ -42,12 +68,14 @@ function countDown()
       if (timeLeft <= 0)
       {
         clearInterval(timerId)
-        // start next task
+          delete descendingTasks[button.id]
+          button.parentNode.remove()
+          console.log(tasks)
+          timeLeft = startCount
+          timeLeftDisplay.textContent = timeLeft
       }
     }, 1000)
 }
-
-countDown()
 
 function render()
 {
@@ -69,7 +97,7 @@ function render()
         controller.id = index
 
         deleteElement.addEventListener('click', deleteTask)
-        controller.addEventListener('click', handleClick(controller))
+        controller.addEventListener('click', () => handleClick(controller))
     
         taskBlock.append(deleteElement, title, controller)
         taskContainer.append(taskBlock)
