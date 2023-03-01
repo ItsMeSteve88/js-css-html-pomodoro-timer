@@ -3,7 +3,7 @@ const submitButton = document.querySelector('.submit-button')
 const timeLeftDisplay = document.querySelector('#time-left')
 const sliderFill = document.querySelector('.fill')
 
-const startCount = 5
+const startCount = 25 * 60
 let timeLeft = startCount
 let timerId
 
@@ -27,6 +27,13 @@ let tasks = [
 
 const descendingTasks = tasks.sort((taskA, taskB) => taskA.priority - taskB.priority)
 
+function convertToMin(secondsLeft)
+{
+    const minutes = Math.floor(secondsLeft / 60)
+    const seconds = secondsLeft - minutes * 60
+    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds
+}
+
 function handleClick(button)
 {
     switch (button.textContent)
@@ -47,7 +54,7 @@ function handleClick(button)
                 button.classList.remove('active-button')
                 clearInterval(timerId)
                 timeLeft = startCount
-                timeLeftDisplay.textContent = timeLeft
+                timeLeftDisplay.textContent = convertToMin(timeLeft)
             })
         
             button.textContent = 'ACTIVE'
@@ -63,7 +70,7 @@ function countDown(button)
   timerId = setInterval(() =>
     {
         timeLeft-- 
-      timeLeftDisplay.textContent = timeLeft
+      timeLeftDisplay.textContent = convertToMin(timeLeft)
       sliderFill.style.width = (timeLeft / startCount) * 100 + '%'
       if (timeLeft <= 0)
       {
@@ -72,7 +79,7 @@ function countDown(button)
           button.parentNode.remove()
           console.log(tasks)
           timeLeft = startCount
-          timeLeftDisplay.textContent = timeLeft
+          timeLeftDisplay.textContent = convertToMin(timeLeft)
       }
     }, 1000)
 }
@@ -109,9 +116,8 @@ render()
 
 function deleteTask(e)
 {
-    const task = e.target.parentNode
-    task.remove()
-    // console.log(tasks) toDo: remove from array
+    e.target.parentNode.remove()
+    descendingTasks[e.target.parentNode.lastChild.id]    
 }
 
 function addTask()

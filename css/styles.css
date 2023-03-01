@@ -106,7 +106,7 @@ body {
   }
   
   .active-button {
-    background-color: rgb(244, 83, 83);
+    background-color: rgb(244, 83, 83) !important; 
     color: rgb(255, 255, 255);
   }
   
